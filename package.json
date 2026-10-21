@@ -1,0 +1,26 @@
+{
+  "name": "apexlive-discord-bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --import tsx src/index.ts",
+    "dev": "node --watch --import tsx src/index.ts",
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --target=node20 --packages=external --outfile=dist/index.js",
+    "package": "npm run build && rm -f apexlive-bot.zip && zip -r apexlive-bot.zip dist package.json package-lock.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.11",
+    "typescript": "^5.6.3",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "main": "dist/index.js"
+}
