@@ -5,7 +5,7 @@
 Formula 1 race reminders, results and standings for your Discord server. Companion to the
 [ApexLive website](https://thaneshwaraa.github.io/Apexlive/).
 
-**[Add it to your server →](https://thaneshwaraa.github.io/Apexlive/discord/)**
+**[Add it to your server →](https://discord.com/oauth2/authorize?client_id=1562349844318654505&scope=bot+applications.commands&permissions=268585984)**
 
 ## What it does
 
@@ -33,33 +33,30 @@ timezone (e.g. `Europe/London`), or to `local` for each reader's own timezone.
 Data comes from [Jolpica-F1](https://github.com/jolpica/jolpica-f1), a free Ergast-compatible API
 that needs no key.
 
-## Run your own copy
+## Add it to your server
 
-1. Go to https://discord.com/developers/applications, click **New Application**, open **Bot**, and
-   copy the token. The bot needs no privileged intents.
-2. Under **OAuth2 → URL Generator**, tick the `bot` and `applications.commands` scopes and the
-   permissions **View Channels**, **Send Messages**, **Embed Links** and **Mention Everyone**. Tick
-   **Manage Roles** too if you want `/notify`. Open the generated URL to invite the bot.
-3. Install and run it (Node 20.12 or newer):
+1. Open the invite link: **[Add ApexLive to Discord](https://discord.com/oauth2/authorize?client_id=1562349844318654505&scope=bot+applications.commands&permissions=268585984)**
+2. Choose your server and click **Authorize**. You need the **Manage Server** permission there.
+3. In the channel you want updates in, run:
 
-   ```bash
-   git clone https://github.com/Thaneshwaraa/Apexlivechatbot.git
-   cd Apexlivechatbot
-   cp .env.example .env    # put your token in DISCORD_TOKEN
-   npm install
-   npm start
+   ```
+   /alerts setup channel:#f1-updates
    ```
 
-4. In your server, run `/alerts setup channel:#f1 role:@F1 Alerts`, then `/alerts test`.
+   Add `role:@F1 Alerts` to ping a role, and `practice:True` for practice reminders.
+4. Run `/alerts test` to check the bot can post there.
 
-Set `DEV_GUILD_ID` in `.env` to your server's ID while testing, so commands show up immediately.
-Global commands can take up to an hour to appear the first time.
+Members can then type `/notify` to get pinged for reminders. For that to work, the bot's role must
+be **above** the ping role in Server Settings → Roles.
 
-For `/notify` to work, the bot's role must be **above** the ping role in Server Settings → Roles.
+The bot only needs these permissions: View Channels, Send Messages, Embed Links, Mention Everyone
+(to ping the role) and Manage Roles (for `/notify`). For a private channel, also allow the bot to
+view and send messages in that channel's permissions.
 
-## Hosting
+## Hosting (maintainers)
 
-The bot has to run all the time. Any always-on machine works, such as a small VPS, a Raspberry Pi, or
+To run the bot yourself, put its token in `.env` (see `.env.example`), then `npm install` and
+`npm start`. It has to run all the time. Any always-on machine works, such as a small VPS, a Raspberry Pi, or
 a host like Railway or Fly.io. To keep it running with pm2:
 
 ```bash
